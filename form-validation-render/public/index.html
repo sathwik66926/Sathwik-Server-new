@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task 2: Form Validation</title>
+</head>
+<body style="font-family: Arial; background-color: #f2f2f2; margin: 0; padding: 0;">
+    <div style="max-width: 400px; margin: 50px auto; background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        <h2 style="text-align: center;">Registration Form</h2>
+        <form action="/submit" method="POST" onsubmit="return validateForm()">
+            <label style="display: block; margin: 10px 0 5px;">Full Name:</label>
+            <input type="text" name="fullname" id="fullname" style="width: 100%; padding: 8px;" required>
+
+            <label style="display: block; margin: 10px 0 5px;">Email:</label>
+            <input type="email" name="email" id="email" style="width: 100%; padding: 8px;" required>
+
+            <label style="display: block; margin: 10px 0 5px;">Password:</label>
+            <input type="password" name="password" id="password" style="width: 100%; padding: 8px;" required>
+
+            <button type="submit" style="margin-top: 20px; padding: 10px; width: 100%; background-color: #28a745; color: white; border: none; border-radius: 5px;">
+                Submit
+            </button>
+        </form>
+        <p id="error" style="color: red; margin-top: 10px;"></p>
+    </div>
+
+    <script>
+        function validateForm() {
+            const name = document.getElementById("fullname").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const error = document.getElementById("error");
+
+            if (name === "" || email === "" || password === "") {
+                error.textContent = "All fields are required!";
+                return false;
+            }
+
+            if (!email.includes("@") || !email.includes(".")) {
+                error.textContent = "Enter a valid email!";
+                return false;
+            }
+
+            if (password.length < 6) {
+                error.textContent = "Password must be at least 6 characters!";
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
